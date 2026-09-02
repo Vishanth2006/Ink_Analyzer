@@ -30,17 +30,41 @@ A professional Python web application built with Streamlit for analyzing, estima
 ## 📐 Calculations Performed
 
 ### 1. Page Dimensions & Surface Area
-$$\text{Width (m)} = \left(\frac{\text{Width (pt)}}{72}\right) \times 0.0254, \quad \text{Height (m)} = \left(\frac{\text{Height (pt)}}{72}\right) \times 0.0254$$
-$$\text{Area } (m^2) = \text{Width (m)} \times \text{Height (m)}$$
+Convert PDF points ($72\text{ pt} = 1\text{ inch}$) to meters ($m$):
+
+$$
+\text{Width (m)} = \left(\frac{\text{Width (pt)}}{72}\right) \times 0.0254
+$$
+
+$$
+\text{Height (m)} = \left(\frac{\text{Height (pt)}}{72}\right) \times 0.0254
+$$
+
+$$
+\text{Area } (m^2) = \text{Width (m)} \times \text{Height (m)}
+$$
 
 ### 2. CMYK Coverage Percentage
-For each channel $c \in \{C, M, Y, K\}$ across all $N$ pixels on a rendered page matrix:
-$$\text{Coverage}_c (\%) = \left( \frac{\sum_{i,j} P_{c,i,j}}{255 \times N} \right) \times 100$$
+For each channel $c \in \{ \text{Cyan, Magenta, Yellow, Black} \}$ across all $N$ pixels on a page matrix:
 
-### 3. Ink Consumption Volume (kg per page)
-Given consumption rate $R_c$ ($g/m^2$ at 100% coverage, e.g. $1.5\,g/m^2$):
-$$\text{Ink Weight}_c (\text{kg/page}) = \text{Area } (m^2) \times \left(\frac{\text{Coverage}_c}{100}\right) \times \left(\frac{R_c}{1000}\right)$$
-$$\text{Total Ink Weight (kg)} = \sum_{\text{pages}} \sum_{c \in \{C, M, Y, K\}} \text{Ink Weight}_c \times \text{Print Run Quantity}$$
+$$
+\text{Coverage}_c (\%) = \left( \frac{\sum_{i,j} P_{c,i,j}}{255 \times N} \right) \times 100
+$$
+
+### 3. Ink Consumption Volume & Weight
+Given consumption rate $R_c$ (expressed in $\text{g/m}^2$ at $100\%$ coverage, e.g. $1.5\text{ g/m}^2$):
+
+**Ink Weight per Page (kg):**
+
+$$
+\text{Ink Weight}_c = \text{Area } (m^2) \times \left( \frac{\text{Coverage}_c}{100} \right) \times \left( \frac{R_c}{1000} \right)
+$$
+
+**Total Ink Weight for Print Run (kg):**
+
+$$
+\text{Total Ink Weight} = \left( \sum_{\text{pages}} \sum_{c} \text{Ink Weight}_c \right) \times \text{Print Run Quantity}
+$$
 
 ---
 
