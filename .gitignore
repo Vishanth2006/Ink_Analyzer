@@ -1,0 +1,33 @@
+# Python / Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Application Data & Database
+data/*.db
+data/*.sqlite3
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE & Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# Build / Temp artifacts
+*.log
+*.tmp
+temp/
