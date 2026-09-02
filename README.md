@@ -30,41 +30,56 @@ A professional Python web application built with Streamlit for analyzing, estima
 ## 📐 Calculations Performed
 
 ### 1. Page Dimensions & Surface Area
-Convert PDF points ($72\text{ pt} = 1\text{ inch}$) to meters ($m$):
+Convert PDF points ($72 \text{ pt} = 1 \text{ inch}$) to meters ($m$):
 
-$$
+```math
 \text{Width (m)} = \left(\frac{\text{Width (pt)}}{72}\right) \times 0.0254
-$$
+```
 
-$$
+```math
 \text{Height (m)} = \left(\frac{\text{Height (pt)}}{72}\right) \times 0.0254
-$$
+```
 
-$$
+```math
 \text{Area } (m^2) = \text{Width (m)} \times \text{Height (m)}
-$$
+```
+
+---
 
 ### 2. CMYK Coverage Percentage
-For each channel $c \in \{ \text{Cyan, Magenta, Yellow, Black} \}$ across all $N$ pixels on a page matrix:
+Calculated for each channel $c \in \{ \text{Cyan, Magenta, Yellow, Black} \}$ across all $N$ pixels on the page matrix:
 
-$$
-\text{Coverage}_c (\%) = \left( \frac{\sum_{i,j} P_{c,i,j}}{255 \times N} \right) \times 100
-$$
+```math
+\text{Coverage}_c = \left( \frac{\sum P_{c,i,j}}{255 \times N} \right) \times 100
+```
+
+**Formula Summary:**
+```text
+Coverage (%) = (Sum of Channel Pixel Intensities / (255 * Total Pixels)) * 100
+```
+
+---
 
 ### 3. Ink Consumption Volume & Weight
-Given consumption rate $R_c$ (expressed in $\text{g/m}^2$ at $100\%$ coverage, e.g. $1.5\text{ g/m}^2$):
+Based on consumption rate $R_c$ in $\text{g/m}^2$ at $100\%$ coverage (e.g., $1.5 \text{ g/m}^2$):
 
 **Ink Weight per Page (kg):**
 
-$$
+```math
 \text{Ink Weight}_c = \text{Area } (m^2) \times \left( \frac{\text{Coverage}_c}{100} \right) \times \left( \frac{R_c}{1000} \right)
-$$
+```
 
 **Total Ink Weight for Print Run (kg):**
 
-$$
-\text{Total Ink Weight} = \left( \sum_{\text{pages}} \sum_{c} \text{Ink Weight}_c \right) \times \text{Print Run Quantity}
-$$
+```math
+\text{Total Ink Weight} = \left( \sum_{\text{pages}} \sum_{c} \text{Ink Weight}_c \right) \times \text{Print Run Copies}
+```
+
+**Formula Summary:**
+```text
+Page Ink Weight (kg) = Page Area (m²) * (Coverage % / 100) * (Ink Rate g/m² / 1000)
+Total Run Ink (kg)   = Sum of Page Ink Weights * Print Run Quantity
+```
 
 ---
 
